@@ -1,6 +1,7 @@
 ﻿using Common.Core.Data;
 using Customer.API.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,11 +19,10 @@ namespace Customer.API.Repository
 
         public async Task<IEnumerable<Models.Customer>> GetAllAsync() => await _context.Customers.AsNoTracking().ToListAsync();
 
-        public Task<Models.Customer> GetByCpfAsync(string cpf) => _context.Customers.FirstOrDefaultAsync(c => c.Cpf.Value == cpf);
+        public async Task<Models.Customer> GetByCpfAsync(string cpf) => await _context.Customers.FirstOrDefaultAsync(c => c.Cpf.Value == cpf);
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+        public async Task<Models.Customer> GetByIdAsync(Guid id) => await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+
+        public void Dispose() => _context.Dispose();
     }
 }

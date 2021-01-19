@@ -72,7 +72,7 @@ namespace MessageBus
             where TRequest : IntegrationEvent where TResponse : ResponseMessage
         {
             TryConnect();
-            return _bus.RespondAsync(responder);
+            return _bus.RespondAsync(responder); 
         }
 
         private void TryConnect()

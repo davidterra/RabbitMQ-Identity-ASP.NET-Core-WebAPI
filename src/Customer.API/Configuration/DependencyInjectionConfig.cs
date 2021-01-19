@@ -5,7 +5,9 @@ using Customer.API.Data;
 using Customer.API.Repository;
 using FluentValidation.Results;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using WebAPI.Core.Identity;
 
 namespace Customer.API.Configuration
 {
@@ -20,6 +22,9 @@ namespace Customer.API.Configuration
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<CustomerDbContext>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
         }
     }
 }
