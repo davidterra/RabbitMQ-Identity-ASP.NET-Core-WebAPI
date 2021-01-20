@@ -13,6 +13,6 @@ Ambas usam um conceito de DDD aplicando uma camada de Shared Kernel para compart
 
 Também há a aplicação de CQRS com comandos para a criação do usuários e manipulados pelo MediatR.
 
-O controle do acesso a dados ficou por conta do Entity Framework; quando criado o _Mapping_ das entidades com _OwnsOne_ mesmo adicionado a chamada para o _IsRequired_ não estava criando a coluna com _Not Null_ depois de pesquisar descobri que há um falha no EF reportada aqui https://github.com/dotnet/efcore/issues/18445 com isso foi preciso realizar a alteração manualmente na Migrations criada.
+O controle do acesso a dados ficou por conta do Entity Framework; quando criado o _Mapping_ das entidades com _OwnsOne_ mesmo adicionado a chamada para o _IsRequired_ não estava criando a coluna com _Not Null_ depois de pesquisar descobri que há um falha no EF reportada aqui https://github.com/dotnet/efcore/issues/18445 com isso foi preciso realizar a alteração manualmente na _Migrations_ criada.
 
-A comunicação entre as API foi utilizando o RabbitMQ e a biblioteca EasyNetQ com suporte a RPC (Remote Procedure Call) dessa forma quando houvesse uma falha na criação do cliente(Customer.API) é enviado uma mensagem através da fila (Bus) com o erro e então dá-se inicio a exclusão do usuário(Identity.API) caso contrário é entregue para quem solicitou o StatusCode 200.
+A comunicação entre as API foi utilizando o *RabbitMQ* e a biblioteca *EasyNetQ* com suporte a _RPC_(Remote Procedure Call) dessa forma quando houvesse uma falha na criação do cliente(Customer.API) é enviado uma mensagem através da fila (Bus) com o erro e então dá-se inicio a exclusão do usuário(Identity.API) caso contrário é entregue para quem solicitou o StatusCode 200.
